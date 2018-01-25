@@ -1,6 +1,7 @@
 import React from 'react';
 
 import logo from "../assets/Din-Din Logo.png";
+import "./Toolbar.less"
 
 const Toolbar = function() {
 	return (
