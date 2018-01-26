@@ -4,6 +4,7 @@ import {addIndex, curry, evolve, inc, map, pipe, omit, when} from "ramda";
 
 import Toolbar from './Toolbar/Toolbar';
 import Home from './Home/Home';
+import MealDetail from '@/MealDetail/MealDetail';
 import {sortById} from '@/business/meals';
 import MealService from '@/services/meals';
 
@@ -61,7 +62,10 @@ class App extends React.Component {
 			<div className="container-fluid">
 				<Toolbar />
 				<BrowserRouter>
-					<Route path='/' render={ props => <Home {...props } meals={ this.state.meals } handleSorting={ this.handleSorting } handleUseIt={ this.handleUseIt }/> }/>
+					<div>
+						<Route exact path='/' render={ props => <Home {...props } meals={ this.state.meals } handleSorting={ this.handleSorting } handleUseIt={ this.handleUseIt }/> }/>
+						<Route path="/createMeal" component={ MealDetail } />
+					</div>
 				</BrowserRouter>
 			</div>
 		);

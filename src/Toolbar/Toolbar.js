@@ -11,7 +11,7 @@ const Toolbar = function() {
 					<img id="logo" src={ logo } alt="Din Din Logo"/>
 				</div>
 				<div className="col-xs-4 col-lg-2">
-					<router-link to="createMeal"><h3 className="nav">New Meal</h3></router-link>
+					<router-link to="createMeal"><a href="/createMeal"><h3 className="nav">New Meal</h3></a></router-link>
 				</div>
 				<div className="col-xs-4 col-lg-2">
 					<router-link to="createMeal"><h3 className="nav">Random Meal</h3></router-link>
