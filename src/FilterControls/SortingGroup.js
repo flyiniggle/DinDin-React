@@ -1,8 +1,10 @@
 import React from 'react';
-import {pipe, reverse} from "ramda";
+import {adjust, pipe, reverse} from "ramda";
 
 import SortOption from './SortOption';
 import {sortRecentlyPrepared, sortById} from "@/business/meals";
+
+
 
 
 class SortingGroup extends React.Component {
@@ -38,6 +40,13 @@ class SortingGroup extends React.Component {
 			this.props.handleSorting
 		)(this.props.meals);
 	};
+
+	handleUseIt = () => {
+		pipe(
+			sortById,
+
+		)
+	}
 
 	render = () => {
 		return (

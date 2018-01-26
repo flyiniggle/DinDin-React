@@ -69,7 +69,7 @@ const MealCard = function(props) {
 				<div className="col-xs-4 text-center">
 					<div className="mealStat card-block">
 						<button type="button" className="btn btn-primary"
-						onClick={ props.markUsed }>Use it!
+						onClick={ props.handleUseIt }>Use it!
 					</button>
 				</div>
 			</div>

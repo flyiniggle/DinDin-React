@@ -6,12 +6,8 @@ import MealCard from "@/MealCard/MealCard";
 import Overview from "@/Overview/Overview";
 
 
-const markUsed = curry(function(mealId, event) {
-	console.log(mealId)
-});
-
-const renderMealCards = map((meal) => {
-	return <MealCard meal={ meal } key={ meal.id } markUsed={ markUsed(meal.id) }/>
+const renderMealCards = (handler) => map((meal) => {
+	return <MealCard meal={ meal } key={ meal.id } handleUseIt={ handler.bind(null, meal.id) }/>
 });
 
 const Home = function(props) {
@@ -24,10 +20,10 @@ const Home = function(props) {
 			</div>
 			<div className="row">
 				<div className="col-xs-12 col-md-4">
-					<Overview meals={ props.meals }/>
+					<Overview meals={ props.meals } />
 				</div>
 				<div className="col-xs-12 col-md-8">
-					{ renderMealCards(props.meals || []) }
+					{ renderMealCards(props.handleUseIt)(props.meals || []) }
 				</div>
 			</div>
 		</div>

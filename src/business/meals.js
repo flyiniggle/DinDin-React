@@ -24,7 +24,7 @@ function compareId(mealA, mealB) {
   const mealAId = mealA.id || 0;
   const mealBId = mealB.id || 0;
 
-  return mealBId - mealAId;
+  return mealAId - mealBId;
 }
 
 function sortById(meals = []) {
