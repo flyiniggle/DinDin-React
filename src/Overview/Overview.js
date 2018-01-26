@@ -11,7 +11,7 @@ const Overview = function(props) {
 	const renderMealNamesList = map((meal) => <li>{meal.name}</li>);
 	const threeMostPrepared = pipe(sortMostUsed, getFirstThree, renderMealNamesList);
 	const threeLeastPrepared = pipe(sortMostUsed, reverse, getFirstThree, renderMealNamesList);
-	const lastMeal = pipe(sortRecentlyPrepared, last, prop("name"));
+	const lastMeal = pipe(sortRecentlyPrepared, reverse, last, prop("name"));
 
 
 	return (
