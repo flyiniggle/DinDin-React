@@ -20,7 +20,9 @@ class App extends React.Component {
 		}
 	}
 
-	componentDidMount() {
+	handleSorting = (meals = []) => this.setState({meals});
+
+		componentDidMount() {
 		MealService.get()
 			.then(mapWithIndex(identifyMeal))
 			.then(data => this.setState({ meals: data }));
@@ -31,7 +33,7 @@ class App extends React.Component {
 			<div className="container-fluid">
 				<Toolbar />
 				<BrowserRouter>
-					<Route path='/' render={ props => <Home {...props } meals={ this.state.meals }/> }/>
+					<Route path='/' render={ props => <Home {...props } meals={ this.state.meals } handleSorting={ this.handleSorting }/> }/>
 				</BrowserRouter>
 			</div>
 		);

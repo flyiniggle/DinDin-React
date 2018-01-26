@@ -19,7 +19,7 @@ const Home = function(props) {
 		<div className="container">
 			<div className="row">
 				<div className="col-xs-12">
-					<FilterControls meals={ props.meals }/>
+					<FilterControls meals={ props.meals } handleSorting={ props.handleSorting }/>
 				</div>
 			</div>
 			<div className="row">

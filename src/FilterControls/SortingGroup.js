@@ -14,27 +14,29 @@ class SortingGroup extends React.Component {
 		}
 	}
 
-	sortRecentlyPrepared = () => {
+	handleSortRecentlyPrepared = () => {
 		this.setState({selected: "recentlyPrepared"});
-		sortRecentlyPrepared(this.props.meals);
+		pipe(
+			sortRecentlyPrepared,
+			this.props.handleSorting
+		)(this.props.meals);
 	};
 
-	sortLongestUnused = () => {
+	handleSortLongestUnused = () => {
 		this.setState({selected: "longestUnused"});
 		pipe(
 			sortRecentlyPrepared,
-			reverse
+			reverse,
+			this.props.handleSorting
 		)(this.props.meals)
 	};
 
-	handleSorting = (sortName, sorter) => {
-		this.setState({selected: sortName});
-		//mediator.$emit("sorted", sorter(this.props.meals));
-	};
-
-	clearSorting = () => {
+	handleClearSorting = () => {
 		this.setState({selected: ""});
-		//mediator.$emit("sorted", sortById(this.props.meals));
+		pipe(
+			sortById,
+			this.props.handleSorting
+		)(this.props.meals);
 	};
 
 	render = () => {
@@ -42,13 +44,13 @@ class SortingGroup extends React.Component {
 			<div className="col-xs-12 col-md-9">
 				<SortOption
 					active={ this.state.selected === 'recentlyPrepared' }
-					selectedHandler={ this.sortRecentlyPrepared }
-					unselectedHandler={ this.clearSorting }>recently used
+					selectedHandler={ this.handleSortRecentlyPrepared }
+					unselectedHandler={ this.handleClearSorting }>recently used
 				</SortOption>
 				<SortOption
 					active={ this.state.selected === "longestUnused" }
-					selectedHandler={ this.sortLongestUnused}
-					unselectedHandler={ this.clearSorting }>longest unused
+					selectedHandler={ this.handleSortLongestUnused}
+					unselectedHandler={ this.handleClearSorting }>longest unused
 				</SortOption>
 			</div>
 		)
