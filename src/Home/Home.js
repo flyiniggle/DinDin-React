@@ -1,6 +1,7 @@
 import React from "react";
 import { map, curry } from "ramda";
 
+import FilterControls from "@/FilterControls/FilterControls"
 import MealCard from "@/MealCard/MealCard";
 import Overview from "@/Overview/Overview";
 
@@ -18,7 +19,7 @@ const Home = function(props) {
 		<div className="container">
 			<div className="row">
 				<div className="col-xs-12">
-					<p>filter controls</p>
+					<FilterControls meals={ props.meals }/>
 				</div>
 			</div>
 			<div className="row">
