@@ -6,9 +6,8 @@ import Toolbar from './Toolbar/Toolbar';
 import Home from './Home/Home';
 import MealService from '@/services/meals';
 
+import './App.less';
 
-import '../node_modules/bootstrap/less/bootstrap.less';
-import '@/less/variables.less';
 
 const identifyMeal = (meal, id) => Object.assign({id}, meal);
 const mapWithIndex = addIndex(map);
