@@ -1,4 +1,16 @@
 import React from "react";
+import { map, curry } from "ramda";
+
+import MealCard from "@/MealCard/MealCard";
+
+const markUsed = curry(function(mealId, event) {
+	console.log(mealId)
+});
+
+const renderMealCards = map((meal) => {
+	console.log(meal)
+	return <MealCard meal={ meal } key={ meal.id } markUsed={ markUsed(meal.id) }/>
+});
 
 const Home = function(props) {
 	return (
@@ -13,7 +25,7 @@ const Home = function(props) {
 					<p>overview!</p>
 				</div>
 				<div className="col-xs-12 col-md-8">
-					<p>meal cards!</p>
+					{ renderMealCards(props.meals || []) }
 				</div>
 			</div>
 		</div>
