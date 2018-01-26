@@ -41,13 +41,13 @@ class SortingGroup extends React.Component {
 		return (
 			<div className="col-xs-12 col-md-9">
 				<SortOption
-					active={ this.selected === 'recentlyPrepared' }
+					active={ this.state.selected === 'recentlyPrepared' }
 					selectedHandler={ this.sortRecentlyPrepared }
 					unselectedHandler={ this.clearSorting }>recently used
 				</SortOption>
 				<SortOption
-					active={ this.selected === "longestUnused" }
-					selectedHandler={ this.sortLongestUnused }
+					active={ this.state.selected === "longestUnused" }
+					selectedHandler={ this.sortLongestUnused}
 					unselectedHandler={ this.clearSorting }>longest unused
 				</SortOption>
 			</div>
