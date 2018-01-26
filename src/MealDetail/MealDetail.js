@@ -1,10 +1,14 @@
 import React from 'react';
+import {withRouter} from 'react-router';
+
+import './MealDetail.less';
 
 class MealDetail extends React.Component {
 	constructor() {
 		super();
 
 		this.state = {
+			name: "",
 			prepHours: 0,
 			prepMinutes: 0,
 			taste: 5,
@@ -12,12 +16,29 @@ class MealDetail extends React.Component {
 		}
 	}
 
+	handleSave = () => {
+		const prepTime = parseInt(this.state.prepMinutes) + (parseInt(this.state.prepHours) * 60);
+		const { name, taste, difficulty } = this.state;
+		const newMeal = {
+			name,
+			prepTime,
+			taste,
+			difficulty
+		};
+		this.props.saveHandler(newMeal);
+		this.props.history.push('/');
+	};
+
 	render() {
 		return (
 			<div id="main" className="container">
 				<div className="row">
 					<div className="col-xs-12 col-md-4">
-						<input type="text" className="form-control" v-model="name"/>
+						<input
+							type="text"
+							className="form-control"
+							value={ this.state.name }
+							onChange={ (event) => this.setState({name: event.target.value}) }/>
 					</div>
 					<div className="col-xs-12 col-md-8">
 					</div>
@@ -29,7 +50,7 @@ class MealDetail extends React.Component {
 								id="prepHours" type="number"
 								className="form-control smallInput"
 								value={ this.state.prepHours }
-								onInput={ (event) => this.setState({prepHours: event.target.value}) } />
+								onChange={ (event) => this.setState({prepHours: event.target.value}) } />
 							<label htmlFor="prepHours">hours</label>
 						</p>
 						<p>
@@ -37,8 +58,8 @@ class MealDetail extends React.Component {
 								id="minutes"
 								type="number"
 								className="form-control smallInput"
-								value={ this.state.prepHours }
-								onInput={ (event) => this.setState({prepMinutes: event.target.value}) } />
+								value={ this.state.prepMinutes }
+								onChange={ (event) => this.setState({prepMinutes: event.target.value}) } />
 							<label htmlFor="minutes">minutes</label>
 						</p>
 						<p>
@@ -46,8 +67,8 @@ class MealDetail extends React.Component {
 								id="taste"
 								type="number"
 								className="form-control smallInput"
-								value={ this.state.prepHours }
-								onInput={ (event) => this.setState({taste: event.target.value}) } />
+								value={ this.state.taste }
+								onChange={ (event) => this.setState({taste: event.target.value}) } />
 							<label htmlFor="taste">taste</label>
 						</p>
 						<p>
@@ -55,17 +76,17 @@ class MealDetail extends React.Component {
 								id="difficulty"
 								type="number"
 								className="form-control smallInput"
-								value={ this.state.prepHours }
-								onInput={ (event) => this.setState({difficulty: event.target.value}) } />
+								value={ this.state.difficulty }
+								onChange={ (event) => this.setState({difficulty: event.target.value}) } />
 							<label htmlFor="difficulty">difficulty</label>
 						</p>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-xs-12">
-						<button type="button" className="btn btn-default" onClick="save">save</button>
+						<button type="button" className="btn btn-default" onClick={ this.handleSave } >save</button>
 						<router-link to="/">
-							<button type="button" className="btn btn-default">cancel</button>
+							<a href="/"><button type="button" className="btn btn-default">cancel</button></a>
 						</router-link>
 					</div>
 				</div>
@@ -74,4 +95,4 @@ class MealDetail extends React.Component {
 	}
 }
 
-export default MealDetail;
+export default withRouter(MealDetail);

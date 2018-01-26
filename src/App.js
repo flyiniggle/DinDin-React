@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import {addIndex, curry, evolve, inc, map, pipe, omit, when} from "ramda";
+import {addIndex, append, curry, evolve, inc, map, pipe, omit, when} from "ramda";
 
 import Toolbar from './Toolbar/Toolbar';
 import Home from './Home/Home';
@@ -31,8 +31,8 @@ const updateMealAtIndex = function(index, meals) {
 };
 
 class App extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			meals: [{}]
 		}
@@ -46,6 +46,20 @@ class App extends React.Component {
 		this.setState({meals});
 
 		pipe(
+			sortById,
+			map(unIdentifyMeal),
+			MealService.post
+		)(meals);
+	};
+
+	handleSaveNewMeal = (newMeal) => {
+		const taggedNewMeal = identifyMeal(newMeal, this.state.meals.length);
+		const meals = append(taggedNewMeal, this.state.meals);
+
+		this.setState({meals});
+
+		pipe(
+			sortById,
 			map(unIdentifyMeal),
 			MealService.post
 		)(meals);
@@ -64,7 +78,7 @@ class App extends React.Component {
 				<BrowserRouter>
 					<div>
 						<Route exact path='/' render={ props => <Home {...props } meals={ this.state.meals } handleSorting={ this.handleSorting } handleUseIt={ this.handleUseIt }/> }/>
-						<Route path="/createMeal" component={ MealDetail } />
+						<Route path="/createMeal" render={ props => <MealDetail {...props} saveHandler={ this.handleSaveNewMeal } /> } />
 					</div>
 				</BrowserRouter>
 			</div>
