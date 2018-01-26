@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import {addIndex, map, pipe, omit, when} from "ramda";
+import {addIndex, curry, evolve, inc, map, pipe, omit, when} from "ramda";
 
 import Toolbar from './Toolbar/Toolbar';
 import Home from './Home/Home';
@@ -16,12 +16,17 @@ const unIdentifyMeal = (meal) => omit("id", meal);
 
 const mapWithIndex = addIndex(map);
 
-const updateMealLastUsed = (meal) => Object.assign(meal, {lastUsed: Date.now()});
+const useMeal = evolve({
+	lastUsed: () => Date.now(),
+	usedCount: inc
+});
+
+const mealMatchesIndex = curry((index, meal) => meal.id === index);
 
 const updateMealAtIndex = function(index, meals) {
-	let updateMatchingMeal = when((meal) => meal.id === index, updateMealLastUsed);
+	let useMealAtIndex = when(mealMatchesIndex(index), useMeal);
 
-	return map(updateMatchingMeal, meals)
+	return map(useMealAtIndex, meals);
 };
 
 class App extends React.Component {
@@ -35,7 +40,6 @@ class App extends React.Component {
 	handleSorting = (meals = []) => this.setState({meals});
 
 	handleUseIt = (index) => {
-
 		const meals = updateMealAtIndex(index, this.state.meals);
 
 		this.setState({meals});
