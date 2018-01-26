@@ -1,7 +1,9 @@
 import React from "react";
-import { map, pipe, reverse, slice } from 'ramda';
+import { last, map, pipe, reverse, slice } from 'ramda';
 
 import { sortMostUsed, sortRecentlyPrepared } from "@/business/meals";
+
+import "./Overview.less";
 
 const Overview = function(props) {
 	const meals = props.meals || [];
@@ -9,7 +11,7 @@ const Overview = function(props) {
 	const renderMealNamesList = map((meal) => <li>{meal.name}</li>);
 	const threeMostPrepared = pipe(sortMostUsed, getFirstThree, renderMealNamesList);
 	const threeLeastPrepared = pipe(sortMostUsed, reverse, getFirstThree, renderMealNamesList);
-	const lastMeal = sortRecentlyPrepared(meals)[0];
+	const lastMeal = pipe(sortRecentlyPrepared, last);
 
 
 	return (
@@ -38,4 +40,4 @@ const Overview = function(props) {
 	)
 };
 
-export default Overview
+export default Overview;
