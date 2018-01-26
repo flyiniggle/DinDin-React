@@ -6,9 +6,6 @@ node_js:
 install:
   - npm install
 # command to run tests
-script:
-  - npm run server-start
-  - npm run start
 
 deploy:
   provider: heroku
