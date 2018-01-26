@@ -11,11 +11,18 @@ import './App.less';
 
 
 const identifyMeal = (meal, id) => Object.assign({id}, meal);
+
 const unIdentifyMeal = (meal) => omit("id", meal);
 
 const mapWithIndex = addIndex(map);
 
 const updateMealLastUsed = (meal) => Object.assign(meal, {lastUsed: Date.now()});
+
+const updateMealAtIndex = function(index, meals) {
+	let updateMatchingMeal = when((meal) => meal.id === index, updateMealLastUsed);
+
+	return map(updateMatchingMeal, meals)
+};
 
 class App extends React.Component {
 	constructor() {
@@ -28,12 +35,15 @@ class App extends React.Component {
 	handleSorting = (meals = []) => this.setState({meals});
 
 	handleUseIt = (index) => {
-		let updateMatchingMeal = when((meal) => meal.id === index, updateMealLastUsed);
-		let meals = pipe(
-			map(updateMatchingMeal)
-		)(this.state.meals);
+
+		const meals = updateMealAtIndex(index, this.state.meals);
 
 		this.setState({meals});
+
+		pipe(
+			map(unIdentifyMeal),
+			MealService.post
+		)(meals);
 	};
 
 	componentDidMount() {
