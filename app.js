@@ -45,7 +45,7 @@ app.post("/meals", function(req, res) {
     .then(function() {
       res.status(200).send()
     });
-})
+});
 
 app.listen(3090, function() {
 	console.log("I hear you at http://localhost:3090"); // eslint-disable-line no-console
