@@ -6,10 +6,5 @@ node_js:
 install:
   - npm install
 # command to run tests
-
-deploy:
-  provider: heroku
-  app: dindin-react
-  skip_cleanup: true
-  on:
-    branch: master
+script:
+  - npm test
