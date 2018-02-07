@@ -1,7 +1,7 @@
 import React from "react";
 import { last, map, pipe, prop, reverse, slice } from 'ramda';
 
-import { sortMostUsed, sortRecentlyPrepared } from "@/business/meals";
+import { sortMostUsed, sortRecentlyPrepared } from "@/business/sorting";
 
 import "./Overview.less";
 

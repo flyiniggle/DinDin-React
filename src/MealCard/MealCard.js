@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 import moment from "moment";
 import "./MealCard.less";
 
@@ -47,7 +48,7 @@ function formatLastUsed(lastUsed) {
 
 
 
-const MealCard = function(props) {
+const MealCard = observer(function(props) {
 
 	return (
 		<div className="mealCard card">
@@ -69,13 +70,13 @@ const MealCard = function(props) {
 				<div className="col-xs-4 text-center">
 					<div className="mealStat card-block">
 						<button type="button" className="btn btn-primary"
-						onClick={ props.handleUseIt }>Use it!
+						onClick={ props.meal.useMeal }>Use it!
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	)
-};
+});
 
 export default MealCard;

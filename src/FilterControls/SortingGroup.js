@@ -1,9 +1,8 @@
 import React from 'react';
-import {adjust, pipe, reverse} from "ramda";
+import {pipe, reverse} from "ramda";
 
 import SortOption from './SortOption';
-import {sortRecentlyPrepared, sortById} from "@/business/meals";
-
+import {sortRecentlyPrepared, sortById} from "@/business/sorting";
 
 
 
@@ -46,7 +45,7 @@ class SortingGroup extends React.Component {
 			sortById,
 
 		)
-	}
+	};
 
 	render = () => {
 		return (

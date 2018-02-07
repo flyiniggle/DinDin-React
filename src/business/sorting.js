@@ -1,4 +1,4 @@
-function compareTimesUsed(mealA, mealB) {
+function returnMoreUsed(mealA, mealB) {
   const mealAUses = mealA.usedCount || 0;
   const mealBUses = mealB.usedCount || 0;
 
@@ -6,7 +6,7 @@ function compareTimesUsed(mealA, mealB) {
 }
 
 function sortMostUsed(meals) {
-  return Array.from(meals).sort(compareTimesUsed);
+  return Array.from(meals).sort(returnMoreUsed);
 }
 
 function compareLastUsed(mealA, mealB) {
@@ -32,7 +32,10 @@ function sortById(meals = []) {
 }
 
 export {
+  returnMoreUsed,
   sortMostUsed,
+  compareLastUsed,
   sortRecentlyPrepared,
+  compareId,
   sortById
 }
