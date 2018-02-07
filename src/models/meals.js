@@ -1,4 +1,4 @@
-import { types, getRoot } from "mobx-state-tree";
+import { types } from "mobx-state-tree";
 import { evolve, map } from 'ramda';
 
 import { mealMatchesId } from "@/business/editing";
