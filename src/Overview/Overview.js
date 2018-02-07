@@ -8,12 +8,11 @@ import "./Overview.less";
 const Overview = function(props) {
 	const meals = props.meals || [];
 	const getFirstThree = slice(0, 3);
-	const renderMealNamesList = map((meal) => <li>{meal.name}</li>);
+	const renderMealNamesList = map((meal) => <li key={ meal.id }>{meal.name}</li>);
 	const threeMostPrepared = pipe(sortMostUsed, getFirstThree, renderMealNamesList);
 	const threeLeastPrepared = pipe(sortMostUsed, reverse, getFirstThree, renderMealNamesList);
 	const lastMeal = pipe(sortRecentlyPrepared, reverse, last, prop("name"));
-
-
+	
 	return (
 		<div id="overview">
 			<div className="row">
