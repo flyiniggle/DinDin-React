@@ -96,18 +96,38 @@ describe("#business/sorting", function() {
         { lastUsed: 3 },
         { lastUsed: 100 },
         { lastUsed: 45 }
-      ]
+      ];
       const expected = [
         { lastUsed: 100 },
         { lastUsed: 45 },
         { lastUsed: 12 },
         { lastUsed: 3 }
-      ]
+      ];
       const results = Sorting.sortRecentlyPrepared(start);
 
       expect(results).toEqual(expected);
     });
   });
+
+	describe("#sortLeastRecentlyPrepared", function() {
+		it("should sort by most recently prepared", function() {
+			const start = [
+				{lastUsed: 12},
+				{lastUsed: 3},
+				{lastUsed: 100},
+				{lastUsed: 45}
+			];
+			const expected = [
+				{lastUsed: 3},
+				{lastUsed: 12},
+				{lastUsed: 45},
+				{lastUsed: 100}
+			];
+			const results = Sorting.sortLeastRecentlyPrepared(start);
+
+			expect(results).toEqual(expected);
+		});
+	});
 
   describe("#compareId", function() {
     it("should return less than 0", function() {
