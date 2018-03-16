@@ -1,14 +1,11 @@
 import React from 'react';
-import {pipe, reverse} from "ramda";
 
 import SortOption from './SortOption';
-import {sortRecentlyPrepared, sortById} from "@/business/sorting";
-
 
 
 class SortingGroup extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			selected: ""
@@ -16,42 +13,24 @@ class SortingGroup extends React.Component {
 	}
 
 	handleSortRecentlyPrepared = () => {
-		this.setState({selected: "recentlyPrepared"});
-		pipe(
-			sortRecentlyPrepared,
-			this.props.handleSorting
-		)(this.props.meals);
+		this.setState({selected: "recentlyUsed"});
+		this.props.handleSorting("recentlyUsed");
 	};
 
 	handleSortLongestUnused = () => {
 		this.setState({selected: "longestUnused"});
-		pipe(
-			sortRecentlyPrepared,
-			reverse,
-			this.props.handleSorting
-		)(this.props.meals)
+		this.props.handleSorting("longestUnused");
 	};
 
 	handleClearSorting = () => {
-		this.setState({selected: ""});
-		pipe(
-			sortById,
-			this.props.handleSorting
-		)(this.props.meals);
-	};
-
-	handleUseIt = () => {
-		pipe(
-			sortById,
-
-		)
+		return this.props.handleSorting("none");
 	};
 
 	render = () => {
 		return (
 			<div className="col-xs-12 col-md-9">
 				<SortOption
-					active={ this.state.selected === 'recentlyPrepared' }
+					active={ this.state.selected === 'recentlyUsed' }
 					selectedHandler={ this.handleSortRecentlyPrepared }
 					unselectedHandler={ this.handleClearSorting }>recently used
 				</SortOption>

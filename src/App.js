@@ -4,9 +4,9 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Toolbar from './Toolbar/Toolbar';
 import Home from './Home/Home';
 import MealDetail from '@/MealDetail/MealDetail';
-import {sortById} from '@/business/sorting';
 
 import './App.less';
+
 
 const App = function(props) {
 	return (

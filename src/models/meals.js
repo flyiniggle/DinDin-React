@@ -40,9 +40,15 @@ const MealList = types.model("MealStore", {
 
 			self.mealsList.push(newMeal)
 		},
-		load: function(data) {
+		load(data) {
 			self.mealsList = map(normalizeMeal, data);
-		}.bind(this)
+		}
+	}
+}).views(function(self) {
+	return {
+		sorted(sorter) {
+			return sorter(self.mealsList);
+		}
 	}
 });
 
